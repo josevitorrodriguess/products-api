@@ -6,6 +6,7 @@ router.post('/', productController.createProduct)
 router.get('/findAll', productController.getAllProducts)
 router.get('/:id', productController.getProductById)
 router.get('/', productController.getProductsWithFilter)
+router.put('/:id', productController.updateProduct)
 
 
 module.exports = router
