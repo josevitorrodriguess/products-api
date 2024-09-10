@@ -99,15 +99,32 @@ class ProductRepository {
             if (product.quantity_in_stock < quantity) {
                 throw new Error('Not enough stock')
             }
-
+    
             product.quantity_in_stock -= quantity
             await product.save()
-
+    
             return product
         } catch (error) {
             throw new Error(`Error updating stock: ${error.message}`)
         }
     }
+
+    async restoreStock(productId, quantity) {
+        try {
+            const product = await Product.findByPk(productId)
+            if (!product) {
+                throw new Error('Product not found')
+            }
+    
+            product.quantity_in_stock += quantity
+            await product.save()
+    
+            return product
+        } catch (error) {
+            throw new Error(`Error restoring stock: ${error.message}`)
+        }
+    }
+    
 }
  
 

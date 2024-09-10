@@ -10,11 +10,11 @@ const ShoppingCart = sequelize.define('ShoppingCart', {
     product_id: {
         type: DataTypes.INTEGER,
         references: {
-            model: 'Products',  
+            model: 'products',  
             key: 'id'          
         },
-        onUpdate: 'CASCADE',    
-        onDelete: 'CASCADE',    
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
     },
     quantity: {
         type: DataTypes.INTEGER,

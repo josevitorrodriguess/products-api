@@ -17,6 +17,17 @@ class ShoppingCartController {
             res.status(400).json({ error: error.message })
         }
     }
+
+    async deleteShoppingCart(req, res) {
+        try {
+            const cartId = req.params.id
+            await ShoppingCartService.deleteCart(cartId)
+            res.status(200).json({ message: 'Cart deleted successfully' })
+        } catch (error) {
+            console.error('Error deleting shopping cart:', error)
+            res.status(400).json({ error: error.message })
+        }
+    }
 }
 
 module.exports = new ShoppingCartController()
