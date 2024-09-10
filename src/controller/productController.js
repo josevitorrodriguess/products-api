@@ -70,6 +70,29 @@ class ProductController {
         res.status(500).json({ message: 'Failed to retrieve products' });
     }
     }
+
+    async updateProduct(req,res) {
+        const { id } = req.params
+        const { name, description, price, quantity_in_stock } = req.body
+
+        try {
+        
+            const updatedProduct = { name, description, price, quantity_in_stock }
+         
+            const product = await productService.updateProduct(id, updatedProduct)
+
+            if (!product) {
+                return res.status(404).json({ message: 'Product not found' })
+            }
+
+            res.json(product)
+        } catch (error) {
+            console.error(`Error in updateProduct controller: ${error.message}`)
+            res.status(500).json({ message: 'Failed to update product' })
+        }
+    }
+
+
 }
     
 
