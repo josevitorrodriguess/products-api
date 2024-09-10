@@ -40,14 +40,26 @@ class ProductRepository {
 
     async getOrderedByPrice() {
         try {
-            // Força a ordenação ascendente
+           
             return await Product.findAll({
                 attributes: ['id', 'name', 'price', 'quantity_in_stock'],
-                order: [['price', 'ASC']] // Sempre em ordem ascendente
+                order: [['price', 'ASC']] 
             });
         } catch (error) {
-            console.error(`Error in getOrderedByPrice: ${error.message}`);
-            throw new Error(`Failed to retrieve products ordered by price: ${error.message}`);
+            console.error(`Error in getOrderedByPrice: ${error.message}`)
+            throw new Error(`Failed to retrieve products ordered by price: ${error.message}`)
+        }
+    }
+
+    async  getByLowInStock() {
+        try{
+            return await Product.findAll({
+                attributes: ['id', 'name', 'price', 'quantity_in_stock'],
+                order: [['quantity_in_stock', 'ASC']],
+                limit: 10
+            }) 
+        } catch (error){
+                throw new Error(`Failed to retrieve products ordered by stock: ${error.message}`)
         }
     }
  }
