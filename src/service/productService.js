@@ -27,9 +27,22 @@ class ProductService {
   }
 
 
-  async getProductById(id) {
-    return await productRepository.getById(id)
+  async getProductById (id) {
+    try{
+       return await productRepository.getById(id)
+    } catch (error) {
+        throw new Error(`Failed to retrieve products: ${error.message}`)
+    }
   }
+
+  async  getOrderedByPrice(order) {
+    try {
+      return await productRepository.getOrderedByPrice();
+  } catch (error) {
+      console.error(`Error in getOrderedByPrice service: ${error.message}`);
+      throw new Error(`Failed to retrieve products: ${error.message}`);
+  }
+}
 
 
   async updateProduct(id, data) {
