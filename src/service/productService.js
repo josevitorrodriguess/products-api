@@ -59,7 +59,7 @@ class ProductService {
   }
 
   async deleteProduct(id) {
-    return await productRepository.delete(id)
+    return await productRepository.deleteProduct(id)
   }
 }
 
