@@ -18,8 +18,12 @@ class ProductService {
       }
     
 
-  async getAllProducts() {
-    return await productRepository.getAll()
+  async getAll() {
+    try {
+        return await productRepository.getAll()
+      } catch (error) {
+        throw new Error(`Failed to retrieve products: ${error.message}`)
+      }
   }
 
 
