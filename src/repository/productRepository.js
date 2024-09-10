@@ -23,7 +23,13 @@ class ProductRepository {
   
   
     async getAll() {
-        return await Product.findAll()
+        try {
+            return await Product.findAll({
+              attributes: ['id', 'name', 'price', 'quantity_in_stock'] 
+            })
+          } catch (error) {
+            throw new Error(`Failed to retrieve products: ${error.message}`)
+          }
     }
 
     async getById(id) {
