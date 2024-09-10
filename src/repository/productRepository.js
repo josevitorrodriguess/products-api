@@ -74,9 +74,21 @@ class ProductRepository {
             return product
         } catch (error) {
             console.error(`Error updating product: ${error.message}`)
-            throw error
+            throw new Error(error.message)
         }
     }    
+
+    async deleteProduct(id) {
+        try {
+            return await Product.destroy({
+                where: {
+                    id: id
+                }
+            })
+        } catch (error) {
+            throw new Error(`Failed do delete user ${error.message}`)
+        }
+    }
  }
 
 
