@@ -62,6 +62,21 @@ class ProductRepository {
                 throw new Error(`Failed to retrieve products ordered by stock: ${error.message}`)
         }
     }
+
+
+    async updateProduct(id, updatedProduct){
+        try {
+            const product = await Product.findByPk(id)
+            if (!product) {
+                return null
+            }
+          await product.update(updatedProduct)   
+            return product
+        } catch (error) {
+            console.error(`Error updating product: ${error.message}`)
+            throw error
+        }
+    }    
  }
 
 
