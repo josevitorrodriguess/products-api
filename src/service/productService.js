@@ -55,7 +55,7 @@ class ProductService {
 
 
   async updateProduct(id, data) {
-    return await productRepository.update(id, data)
+    return await productRepository.updateProduct(id, data)
   }
 
   async deleteProduct(id) {
