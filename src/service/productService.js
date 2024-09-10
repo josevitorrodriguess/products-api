@@ -35,14 +35,23 @@ class ProductService {
     }
   }
 
-  async  getOrderedByPrice(order) {
+  async  getOrderedByPrice() {
     try {
-      return await productRepository.getOrderedByPrice();
+      return await productRepository.getOrderedByPrice()
   } catch (error) {
-      console.error(`Error in getOrderedByPrice service: ${error.message}`);
-      throw new Error(`Failed to retrieve products: ${error.message}`);
+      console.error(`Error in getOrderedByPrice service: ${error.message}`)
+      throw new Error(`Failed to retrieve products: ${error.message}`)
   }
 }
+
+  async getByLowInStock() {
+    try {
+      return await productRepository.getByLowInStock()
+    } catch (error) {
+      console.error(`Error in getByLowInStock service: ${error.message}`)
+      throw new Error(`Failed to retrieve products: ${error.message}`)
+    }
+  }
 
 
   async updateProduct(id, data) {
