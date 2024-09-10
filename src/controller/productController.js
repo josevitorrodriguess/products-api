@@ -1,4 +1,4 @@
-const { getOrderedByPrice } = require('../repository/productRepository')
+const { getOrderedByPrice, deleteProduct } = require('../repository/productRepository')
 const productService = require('../service/productService')
 
 
@@ -89,6 +89,21 @@ class ProductController {
         } catch (error) {
             console.error(`Error in updateProduct controller: ${error.message}`)
             res.status(500).json({ message: 'Failed to update product' })
+        }
+    }
+
+    async deleteProduct(req,res) {
+        const { id } = req.params
+
+        try {
+            const product = await productService.deleteProduct(id)
+    
+            if (!product) {
+                return res.status(404).json({ message: 'Product not found' })
+            }
+            return res.status(200).json({ message: 'Product deleted successfully' })
+        } catch (error) {
+            return res.status(500).json({ message: 'Error deleting product', error: error.message })
         }
     }
 
