@@ -32,9 +32,7 @@ class ProductRepository {
 
     async getById(id) {
         try {
-            return await Product.findByPk(id, {
-                attributes: ['id', 'name', 'price', 'quantity_in_stock']
-            })
+            return await Product.findByPk(id)
         } catch (error) {
             throw new Error(`Failed to retrieve product: ${error.message}`)
         }
