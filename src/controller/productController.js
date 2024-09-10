@@ -51,16 +51,24 @@ class ProductController {
     }
 
 
-    async  getOrderedByPrice(req, res) {
-        try {
+    async getProductsWithFilter(req, res) {
+        const { order } = req.query;
 
-            const products = await productService.getOrderedByPrice()
-            
-            res.json(products)
-        } catch (error) {
-            console.error(`Error in getOrderedByPrice controller: ${error.message}`)
-            res.status(500).json({ message: 'Failed to retrieve products ordered by price' })
-        }
+    try {
+        let products;
+
+        if (order === 'price-asc') {
+            products = await productService.getOrderedByPrice();
+        } 
+        if (order === 'low-stock') {
+            products = await productService.getByLowInStock();
+        } 
+
+        res.json(products);
+    } catch (error) {
+        console.error(`Error in getProducts controller: ${error.message}`);
+        res.status(500).json({ message: 'Failed to retrieve products' });
+    }
     }
 }
     
